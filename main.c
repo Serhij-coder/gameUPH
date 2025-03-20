@@ -1,16 +1,12 @@
 #include <stdio.h>
 
-const char* enemy1[] = {
-    "  ███  ",
-    " █████ ",
-    "█ ███ █",
-    "███████",
-    " ▀ ▀ ▀ ",
-    NULL
-};
+#ifndef SPRITES
+#include "Sprites.h"
+#endif
 
 int main(void) {
-    printf("Hello, World!\n");
-
+    for (int i = 0; i < 5; i++) {
+        printf("%s\n", enemy1[i]);
+    }
     return 0;
 }
