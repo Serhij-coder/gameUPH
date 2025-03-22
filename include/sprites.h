@@ -14,17 +14,4 @@ typedef struct {
     int height; // Height of the sprite
     int x, y; // Position on the screen
 } Sprite;
-
-typedef struct {
-    int width;
-    int height;
-    char horizontalSymbol;
-    char verticalSymbol;
-    char topLeftCorner;
-    char topRightCorner;
-    char bottomLeftCorner;
-    char bottomRightCorner;
-    int x, y;
-} Border;
-
 #endif //SPRITES_H

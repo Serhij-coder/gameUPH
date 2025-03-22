@@ -28,7 +28,6 @@ Created on: 20.3.2025
 int main(void) {
     // Inialization
     //------------------------------------------
-    setupNonBlockingInput();
     setlocale(LC_ALL, "");
     initscr();
     cbreak();
