@@ -1,4 +1,5 @@
 #include <ncurses.h>
+
 #include <stdio.h>
 #include <unistd.h>
 
@@ -8,10 +9,10 @@
 
 void renderSprite(const Sprite *sprite) {
     for (int i = 0; i < sprite->height; i++) {
-        // Move the cursor to the correct position (optional, depends on your platform)
-        // printw("\033[%d;%dH", sprite->y + i, sprite->x); // ANSI escape code for cursor positioning
-        mvaddstr(sprite->y + i, sprite->x, sprite->data[i]);
+        move(sprite->y + i, sprite->x);
+        printw("%s", sprite->data[i]); // Explicit format specifier
     }
+    refresh(); // Single refresh after all updates
 }
 
 void renderBorder(const Border *border) {

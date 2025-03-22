@@ -16,5 +16,5 @@ void setupNonBlockingInput() {
 }
 
 char getKeyPress() {
-    return  getch();
+    return getch();
 }

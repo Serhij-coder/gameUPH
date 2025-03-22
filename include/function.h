@@ -36,6 +36,7 @@ char getKeyPress();
 
 // Game.c
 void gameLoop();
+
 void playerMovement(Sprite *player, int key);
 
 #endif //FUCTION_H

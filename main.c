@@ -18,6 +18,7 @@ Created on: 20.3.2025
 
 // Include the necessary libraries
 #include <ncurses.h>
+#include <locale.h>
 
 // Include the necessary header files
 #include "include/settings.h"
@@ -28,12 +29,16 @@ int main(void) {
     // Inialization
     //------------------------------------------
     setupNonBlockingInput();
+    setlocale(LC_ALL, "");
     initscr();
+    cbreak();
     noecho();
     curs_set(0);
+    keypad(stdscr, 1);
+    nodelay(stdscr, 1);
     //------------------------------------------
 
-        gameLoop();
+    gameLoop();
 
     return 0;
 }

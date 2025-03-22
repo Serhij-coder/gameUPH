@@ -10,9 +10,9 @@ extern const char *playerSpriteData[5];
 
 typedef struct {
     const char *data[5]; // Sprite data (5 lines of characters)
-    int width;           // Width of the sprite
-    int height;          // Height of the sprite
-    int x, y;            // Position on the screen
+    int width; // Width of the sprite
+    int height; // Height of the sprite
+    int x, y; // Position on the screen
 } Sprite;
 
 typedef struct {
@@ -25,6 +25,6 @@ typedef struct {
     char bottomLeftCorner;
     char bottomRightCorner;
     int x, y;
-}Border;
+} Border;
 
 #endif //SPRITES_H
