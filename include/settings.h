@@ -6,18 +6,23 @@
 #define SETTINGGS_H
 
 // Game render
-#define FRAME_RATE 60
+#define FRAME_RATE 30
 
-// Game size
-#define GAME_POLE_WIDTH 120
-#define GAME_POLE_HEIGHT 42
+// Sprites
+#define SPRITE_HEIGHT 5
 
-// Border
-#define BORDER_HORIZONTAL_SYMBOL '-'
-#define BORDER_VERTICAL_SYMBOL '|'
-#define BORDER_TOP_LEFT_CORNER '+'
-#define BORDER_TOP_RIGHT_CORNER '+'
-#define BORDER_BOTTOM_LEFT_CORNER '+'
-#define BORDER_BOTTOM_RIGHT_CORNER '+'
+// Bullets
+#define BULLET_HEIGHT 2
+#define BULLETS_ARR_SIZE 10
+#define SHOOT_SPEED 3 // Bullets per second
+
+// Controls
+#define MOVE_LEFT 'a'
+#define MOVE_LEFT_ALT 'h'
+#define MOVE_RIGHT 'd'
+#define MOVE_RIGHT_ALT 'l'
+
+#define SHOOT ' '
+#define SHOOT_ALT 'x'
 
 #endif //SETTINGGS_H
