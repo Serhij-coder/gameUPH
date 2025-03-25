@@ -11,30 +11,37 @@ void gameLoop()
 {
     Window window;
     initWindow(&window);
-    Sprite player = createSprite(playerSpriteData, 7, SPRITE_HEIGHT, 0, 0);
+
+    Player player = createPlayer(playerSpriteData, 7, SPRITE_HEIGHT, 0, 0);
     player.y = window.height - player.height;
     player.x = window.width / 2 - player.width / 2;
+
     Bullet playerBullets[BULLETS_ARR_SIZE];
     createPlayerBulletsArr(playerBullets);
+
+    Enemy enemies[ENEMIES_ARR_SIZE];
+    createEnemiesArr(enemies);
+
+    Bullet enemyBullets[ENEMY_BULLETS_ARR_SIZE];
+    createEnemyBulletArr(enemyBullets);
 
 
     while (1)
     {
         char key = getKeyPress();
-        playerMovement(&player, key);
+        playerMovement(&player, &window, key);
         playerShoot(playerBullets, &player, key);
 
         clear();
         renderBullet(playerBullets);
         renderSprite(&player);
 
-
-        waightForRefreshRate();
+        waitForRefreshRate();
     }
 }
 
 // TODO @kali: Implement ALT key usage (from settings.h)
-void playerMovement(Sprite* player, int key)
+void playerMovement(Player* player, Window* window, int key)
 {
     switch (key)
     {
@@ -49,7 +56,7 @@ void playerMovement(Sprite* player, int key)
     }
 }
 
-void playerShoot(Bullet playerBulletsArr[BULLETS_ARR_SIZE], Sprite* player, int key)
+void playerShoot(Bullet playerBulletsArr[BULLETS_ARR_SIZE], Player* player, int key)
 {
     static int delay = 0;
 
@@ -73,4 +80,9 @@ void playerShoot(Bullet playerBulletsArr[BULLETS_ARR_SIZE], Sprite* player, int 
             }
         }
     }
+}
+
+void enemyMovement(Enemy enemies[ENEMIES_ARR_SIZE], Window* window)
+{
+
 }

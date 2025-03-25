@@ -5,7 +5,9 @@
 #ifndef SPRITES_H
 #define SPRITES_H
 
-extern const char* enemySpriteData[SPRITE_HEIGHT];
+extern const char* enemySpriteData1[SPRITE_HEIGHT];
+extern const char* enemySpriteData2[SPRITE_HEIGHT];
+extern const char* enemySpriteData3[SPRITE_HEIGHT];
 extern const char* playerSpriteData[SPRITE_HEIGHT];
 extern const char* playerBulletSpriteData[BULLET_HEIGHT];
 
@@ -15,7 +17,16 @@ typedef struct
     int width; // Width of the sprite
     int height; // Height of the sprite
     int x, y; // Position on the screen
-} Sprite;
+} Player;
+
+typedef struct
+{
+    const char* data[SPRITE_HEIGHT];
+    int width;
+    int height;
+    int x, y;
+    int active;
+} Enemy;
 
 typedef struct
 {

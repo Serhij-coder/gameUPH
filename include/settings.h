@@ -10,6 +10,13 @@
 
 // Sprites
 #define SPRITE_HEIGHT 5
+#define SPRITE_WIDTH 7
+
+// Enemies
+#define ENEMIES_SPRITES_COUNT 3
+#define ENEMIES_ARR_SIZE 15
+#define ENEMY_BULLETS_ARR_SIZE 50
+#define ENEMY_SHOOT_SPEED 2 // Bullets per second
 
 // Bullets
 #define BULLET_HEIGHT 2

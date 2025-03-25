@@ -6,13 +6,13 @@
 #include "../include/sprites.h"
 #include "../include/structs.h"
 
-void renderSprite(const Sprite* sprite)
+void renderSprite(const Player* sprite)
 {
     for (int i = 0; i < sprite->height; i++)
     {
         mvprintw(sprite->y + i, sprite->x, "%s", sprite->data[i]);
     }
-    refresh(); // Single refresh after all updates
+    refresh();
 }
 
 void renderBullet(Bullet bulletArr[BULLETS_ARR_SIZE])
@@ -35,13 +35,27 @@ void renderBullet(Bullet bulletArr[BULLETS_ARR_SIZE])
     refresh();
 }
 
-void clearConsole()
+void renderEnemies(Enemy enemies[ENEMIES_ARR_SIZE])
 {
-    printf("\033[2J"); // ANSI escape code for clearing the screen
-    printf("\033[1;1H"); // ANSI escape code for moving the cursor to the top-left corner
+    for (int i = 0; i < ENEMIES_ARR_SIZE; i++)
+    {
+        if (enemies[i].active == 1)
+        {
+            enemies[i].y--;
+            if (enemies[i].y < -2)
+            {
+                enemies[i].active = 0;
+            }
+        }
+        for (int j = 0; j < enemies[i].height; j++)
+        {
+            mvprintw(enemies[i].y + j, enemies[i].x, "%s", enemies[i].data[j]);
+        }
+    }
+    refresh();
 }
 
-void waightForRefreshRate()
+void waitForRefreshRate()
 {
     usleep(1000000 / FRAME_RATE);
 }

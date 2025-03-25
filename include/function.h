@@ -7,16 +7,18 @@
 #define FUCTION_H
 
 // Sprites.c
-Sprite createSprite(const char* data[], int width, int height, int x, int y);
+Player createPlayer(const char* data[], int width, int height, int x, int y);
 Bullet createBullet(const char* data[], int width, int height, int x, int y, int active);
-Bullet createPlayerBulletsArr(Bullet bullets[BULLETS_ARR_SIZE]);
+Enemy createEnemy(const char* data[], int width, int height, int x, int y, int active);
+void createEnemiesArr(Enemy enemies[ENEMIES_ARR_SIZE]);
+void createPlayerBulletsArr(Bullet bullets[BULLETS_ARR_SIZE]);
+void createEnemyBulletArr(Bullet bullets[ENEMY_BULLETS_ARR_SIZE]);
 
 
 // Render.c
-void clearConsole();
-void renderSprite(const Sprite* sprite);
+void renderSprite(const Player* sprite);
 void renderBullet(const Bullet* bullet);
-void waightForRefreshRate();
+void waitForRefreshRate();
 void initWindow(Window* window);
 
 // Input.c
@@ -25,7 +27,8 @@ char getKeyPress();
 
 // Game.c
 void gameLoop();
-void playerMovement(Sprite* player, int key);
-void playerShoot(Bullet* playerBulletsArr, Sprite* player, int key);
+void playerMovement(Player* player, Window* window, int key);
+void playerShoot(Bullet playerBulletsArr[BULLETS_ARR_SIZE], Player* player, int key);
+void enemyMovement(Enemy enemies[ENEMIES_ARR_SIZE], Window* window);
 
 #endif //FUCTION_H
