@@ -1,11 +1,4 @@
-/home/serhii/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "Unix Makefiles" -S /home/serhii/CLionProjects/gameUPH -B /home/serhii/CLionProjects/gameUPH/cmake-build-debug
--- The C compiler identification is GNU 14.2.1
--- Detecting C compiler ABI info
--- Detecting C compiler ABI info - done
--- Check for working C compiler: /usr/bin/cc - skipped
--- Detecting C compile features
--- Detecting C compile features - done
--- Found Curses: /usr/lib/libcurses.so
--- Configuring done (0.1s)
+/home/serhii/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "Unix Makefiles" -S /home/serhii/Documents/gameUPH -B /home/serhii/Documents/gameUPH/cmake-build-debug
+-- Configuring done (0.0s)
 -- Generating done (0.0s)
--- Build files have been written to: /home/serhii/CLionProjects/gameUPH/cmake-build-debug
+-- Build files have been written to: /home/serhii/Documents/gameUPH/cmake-build-debug

@@ -1,3 +1,3 @@
-/home/serhii/CLionProjects/gameUPH/cmake-build-debug/CMakeFiles/gameUPH.dir
-/home/serhii/CLionProjects/gameUPH/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/serhii/CLionProjects/gameUPH/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/serhii/Documents/gameUPH/cmake-build-debug/CMakeFiles/gameUPH.dir
+/home/serhii/Documents/gameUPH/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/serhii/Documents/gameUPH/cmake-build-debug/CMakeFiles/rebuild_cache.dir

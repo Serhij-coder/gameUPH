@@ -25,11 +25,8 @@
 
 // Controls
 #define MOVE_LEFT 'a'
-#define MOVE_LEFT_ALT 'h'
 #define MOVE_RIGHT 'd'
-#define MOVE_RIGHT_ALT 'l'
 
 #define SHOOT ' '
-#define SHOOT_ALT 'x'
 
 #endif //SETTINGGS_H

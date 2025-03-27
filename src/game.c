@@ -40,16 +40,23 @@ void gameLoop()
     }
 }
 
-// TODO @kali: Implement ALT key usage (from settings.h)
 void playerMovement(Player* player, Window* window, int key)
 {
     switch (key)
     {
     case MOVE_LEFT:
         player->x--;
+        if (player->x < 0)
+        {
+            player->x = 0;
+        }
         break;
     case MOVE_RIGHT:
         player->x++;
+        if (player->x > window->width- player->width)
+        {
+            player->x = window->width - player->width;
+        }
         break;
     default:
         break;
@@ -66,7 +73,7 @@ void playerShoot(Bullet playerBulletsArr[BULLETS_ARR_SIZE], Player* player, int 
         return;
     }
 
-    if (key == SHOOT || key == SHOOT_ALT)
+    if (key == SHOOT)
     {
         for (int i = 0; i < BULLETS_ARR_SIZE; i++)
         {
