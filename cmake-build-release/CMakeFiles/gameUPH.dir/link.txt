@@ -1,0 +1,1 @@
+/usr/bin/cc -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/gameUPH.dir/link.d CMakeFiles/gameUPH.dir/main.c.o CMakeFiles/gameUPH.dir/src/game.c.o CMakeFiles/gameUPH.dir/src/input.c.o CMakeFiles/gameUPH.dir/src/render.c.o CMakeFiles/gameUPH.dir/src/sprites.c.o -o gameUPH  -lcurses -lform

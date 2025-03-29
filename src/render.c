@@ -43,7 +43,6 @@ void renderEnemies(Enemy enemies[ENEMIES_ARR_SIZE])
     {
         if (enemies[i].active == 1)
         {
-            enemies[i].y++;  // DOLE
             if (enemies[i].y > LINES - 2) // chatko povedal ze aby neusli enemaci z boxu
             {
                 enemies[i].active = 0;
