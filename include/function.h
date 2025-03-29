@@ -20,6 +20,7 @@ void renderSprite(const Player* sprite);
 void renderBullet(const Bullet* bullet);
 void waitForRefreshRate();
 void initWindow(Window* window);
+void renderEnemies(Enemy enemies[ENEMIES_ARR_SIZE]);
 
 // Input.c
 void setupNonBlockingInput();
@@ -27,8 +28,9 @@ char getKeyPress();
 
 // Game.c
 void gameLoop();
-void playerMovement(Player* player, Window* window, int key);
-void playerShoot(Bullet playerBulletsArr[BULLETS_ARR_SIZE], Player* player, int key);
+void playerMovement(Player* player, const Window* window, int key);
+void playerShoot(Bullet playerBulletsArr[BULLETS_ARR_SIZE], const Player* player, int key);
 void enemyMovement(Enemy enemies[ENEMIES_ARR_SIZE], Window* window);
+
 
 #endif //FUCTION_H

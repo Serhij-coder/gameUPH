@@ -26,18 +26,18 @@ Created on: 20.3.2025
 #include "include/function.h"
 
 int main(void) {
-    // Inialization
-    //------------------------------------------
-    setlocale(LC_ALL, "");
-    initscr();
-    cbreak();
-    noecho();
-    curs_set(0);
-    keypad(stdscr, 1);
-    nodelay(stdscr, 1);
-    //------------------------------------------
+ // Inialization
+ //------------------------------------------
+ setlocale(LC_ALL, "");
+ initscr();
+ cbreak();
+ noecho();
+ curs_set(0);
+ keypad(stdscr, 1);
+ nodelay(stdscr, 1);
+ //------------------------------------------
 
-    gameLoop();
+ gameLoop();
 
-    return 0;
+ return 0;
 }

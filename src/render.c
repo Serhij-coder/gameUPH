@@ -1,3 +1,5 @@
+
+
 #include <ncurses.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -29,7 +31,7 @@ void renderBullet(Bullet bulletArr[BULLETS_ARR_SIZE])
         }
         for (int j = 0; j < bulletArr[i].height; j++)
         {
-                mvprintw(bulletArr[i].y + j, bulletArr[i].x, "%s", bulletArr[i].data[j]);
+            mvprintw(bulletArr[i].y + j, bulletArr[i].x, "%s", bulletArr[i].data[j]);
         }
     }
     refresh();
@@ -41,8 +43,8 @@ void renderEnemies(Enemy enemies[ENEMIES_ARR_SIZE])
     {
         if (enemies[i].active == 1)
         {
-            enemies[i].y--;
-            if (enemies[i].y < -2)
+            enemies[i].y++;  // DOLE
+            if (enemies[i].y > LINES - 2) // chatko povedal ze aby neusli enemaci z boxu
             {
                 enemies[i].active = 0;
             }
