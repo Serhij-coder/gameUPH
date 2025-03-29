@@ -1,0 +1,11 @@
+/usr/bin/cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" -S /home/kali/CLionProjects/gameUPH -B /home/kali/CLionProjects/gameUPH/cmake-build-release
+-- The C compiler identification is GNU 14.2.1
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Found Curses: /usr/lib/libcurses.so
+-- Configuring done (0.2s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/kali/CLionProjects/gameUPH/cmake-build-release
