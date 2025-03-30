@@ -17,6 +17,8 @@
 #define ENEMIES_ARR_SIZE 15
 #define ENEMY_BULLETS_ARR_SIZE 50
 #define ENEMY_SHOOT_SPEED 2 // Bullets per second
+#define ENEMY_MOVE_SPEED 15 // Every x frames
+#define ENEMIES_SPAWN_RATE 4 // Every x seconds
 
 // Bullets
 #define BULLET_HEIGHT 2

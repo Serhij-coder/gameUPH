@@ -26,6 +26,7 @@ typedef struct
     int height;
     int x, y;
     int active;
+    int moveTime;
 } Enemy;
 
 typedef struct

@@ -19,8 +19,11 @@ Created on: 20.3.2025
 // Include the necessary libraries
 #include <ncurses.h>
 #include <locale.h>
+#include <time.h>
 
 // Include the necessary header files
+#include <stdlib.h>
+
 #include "include/settings.h"
 #include "include/sprites.h"
 #include "include/function.h"
@@ -36,7 +39,6 @@ int main(void) {
  keypad(stdscr, 1);
  nodelay(stdscr, 1);
  //------------------------------------------
-
  gameLoop();
 
  return 0;

@@ -23,7 +23,7 @@ void initWindow(Window* window);
 void renderEnemies(Enemy enemies[ENEMIES_ARR_SIZE]);
 
 // Input.c
-void setupNonBlockingInput();
+int Random(int min, int max);
 char getKeyPress();
 
 // Game.c
@@ -31,6 +31,11 @@ void gameLoop();
 void playerMovement(Player* player, const Window* window, int key);
 void playerShoot(Bullet playerBulletsArr[BULLETS_ARR_SIZE], const Player* player, int key);
 void enemyMovement(Enemy enemies[ENEMIES_ARR_SIZE], Window* window);
+void collisionCheck(Player* player,
+                    Enemy enemies[ENEMIES_ARR_SIZE],
+                    Bullet playerBulletsArr[BULLETS_ARR_SIZE],
+                    Bullet enemyBullets[ENEMY_BULLETS_ARR_SIZE]);
+void gameOver();
 
 
 #endif //FUCTION_H

@@ -2,6 +2,9 @@
 #include "../include/sprites.h"
 
 #include <stdlib.h>
+#include <time.h>
+
+#include "../include/function.h"
 
 // Define the sprite for an enemy
 const char* enemySpriteData1[] = {
@@ -70,6 +73,7 @@ Enemy createEnemy(const char* data[], int width, int height, int x, int y, int a
     enemy.x = x;
     enemy.y = y;
     enemy.active = active;
+    enemy.moveTime = 0;
     return enemy;
 }
 
@@ -104,11 +108,11 @@ void createEnemiesArr(Enemy enemies[ENEMIES_ARR_SIZE])
         Enemy enemy1 = createEnemy(enemySpriteData1, SPRITE_WIDTH, SPRITE_HEIGHT, -10, -10, 0);
         Enemy enemy2 = createEnemy(enemySpriteData2, SPRITE_WIDTH, SPRITE_HEIGHT, -10, -10, 0);
         Enemy enemy3 = createEnemy(enemySpriteData3, SPRITE_WIDTH, SPRITE_HEIGHT, -10, -10, 0);
-        if (rand() % ENEMIES_SPRITES_COUNT == 0)
+        if (Random(0, ENEMIES_SPRITES_COUNT) == 0)
         {
             enemies[i] = enemy1;
         }
-        else if (rand() % ENEMIES_SPRITES_COUNT == 1)
+        else if (Random(0, ENEMIES_SPRITES_COUNT) == 1)
         {
             enemies[i] = enemy2;
         }
