@@ -7,7 +7,7 @@
 #include "../include/function.h"
 
 // Define the sprite for an enemy
-const char* enemySpriteData1[] = {
+const char* enemySpriteData3[] = {
     " ▀ ▀ ▀ ",
     "███████",
     "█ ███ █",
@@ -21,7 +21,7 @@ const char* enemySpriteData2[] = {
     " █████ ",
     "  █ █  ",
 };
-const char* enemySpriteData3[] = {
+const char* enemySpriteData1[] = {
     " █████ ",
     "█ █ █ █",
     "███████",
@@ -74,6 +74,7 @@ Enemy createEnemy(const char* data[], int width, int height, int x, int y, int a
     enemy.y = y;
     enemy.active = active;
     enemy.moveTime = 0;
+    enemy.shootDelay = 0;
     return enemy;
 }
 

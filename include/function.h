@@ -18,9 +18,10 @@ void createEnemyBulletArr(Bullet bullets[ENEMY_BULLETS_ARR_SIZE]);
 // Render.c
 void renderSprite(const Player* sprite);
 void renderBullet(const Bullet* bullet);
-void waitForRefreshRate();
+void waitForRefreshRate(Settings* setts);
 void initWindow(Window* window);
 void renderEnemies(Enemy enemies[ENEMIES_ARR_SIZE]);
+void renderEnemyBullet(Bullet bulletArr[ENEMY_BULLETS_ARR_SIZE]);
 void renderGameStat(GameStat* stats);
 
 // Input.c
@@ -30,18 +31,22 @@ char getKeyPress();
 // Game.c
 void gameLoop();
 void playerMovement(Player* player, const Window* window, int key);
-void playerShoot(Bullet playerBulletsArr[BULLETS_ARR_SIZE], const Player* player, int key);
-void enemyMovement(Enemy enemies[ENEMIES_ARR_SIZE], Window* window);
+void playerShoot(Bullet playerBulletsArr[BULLETS_ARR_SIZE], const Player* player, Settings* setts, int key);
+void enemyMovement(Enemy enemies[ENEMIES_ARR_SIZE], Window* window, Settings* setts);
+void enemyShoot(Bullet enemyBullets[ENEMY_BULLETS_ARR_SIZE], Enemy enemies[ENEMIES_ARR_SIZE], Settings* setts);
 void collisionCheck(Player* player,
                     Enemy enemies[ENEMIES_ARR_SIZE],
                     Bullet playerBulletsArr[BULLETS_ARR_SIZE],
                     Bullet enemyBullets[ENEMY_BULLETS_ARR_SIZE],
                     GameStat* gameStat);
-void countGameTime(GameStat* gameStat);
+void countGameTime(GameStat* gameStat, Settings* setts);
+void clearGameField(Enemy enemies[ENEMIES_ARR_SIZE],
+                    Bullet playerBulletsArr[BULLETS_ARR_SIZE],
+                    Bullet enemyBullets[ENEMY_BULLETS_ARR_SIZE]);
 void menu(Window* window, GameStat* game_stat, int key);
 void authors(Window* window);
 void settings(Window* window);
-void gameOver();
+int gameOver(Window* window, GameStat* gameStat);
 
 
 #endif //FUCTION_H

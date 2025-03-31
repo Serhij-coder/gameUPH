@@ -14,7 +14,7 @@ typedef struct
 {
     int time;
     int score;
-    int gameMode; // 0 - game, 1 - settings, 2 - authors, 3 - menu
+    int gameMode; // 0 - game, 1 - authors, 2 - menu, 3 - game over
 } GameStat;
 
 #endif //STRUCTS_H
