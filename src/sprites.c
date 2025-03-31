@@ -94,7 +94,7 @@ Bullet createBullet(const char* data[], int width, int height, int x, int y, int
 
 void createPlayerBulletsArr(Bullet bullets[BULLETS_ARR_SIZE])
 {
-    Bullet bullet = createBullet(playerBulletSpriteData, 1, BULLET_HEIGHT, -10, -10, 0);
+    Bullet bullet = createBullet(playerBulletSpriteData, 1, BULLET_HEIGHT, 1000, 1000, 0);
     for (int i = 0; i < BULLETS_ARR_SIZE; i++)
     {
         bullets[i] = bullet;

@@ -28,6 +28,8 @@
 // Controls
 #define MOVE_LEFT 'a'
 #define MOVE_RIGHT 'd'
+#define MENU_UP 'w'
+#define MENU_DOWN 's'
 
 #define SHOOT ' '
 

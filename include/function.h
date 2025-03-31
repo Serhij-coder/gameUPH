@@ -21,6 +21,7 @@ void renderBullet(const Bullet* bullet);
 void waitForRefreshRate();
 void initWindow(Window* window);
 void renderEnemies(Enemy enemies[ENEMIES_ARR_SIZE]);
+void renderGameStat(GameStat* stats);
 
 // Input.c
 int Random(int min, int max);
@@ -34,7 +35,12 @@ void enemyMovement(Enemy enemies[ENEMIES_ARR_SIZE], Window* window);
 void collisionCheck(Player* player,
                     Enemy enemies[ENEMIES_ARR_SIZE],
                     Bullet playerBulletsArr[BULLETS_ARR_SIZE],
-                    Bullet enemyBullets[ENEMY_BULLETS_ARR_SIZE]);
+                    Bullet enemyBullets[ENEMY_BULLETS_ARR_SIZE],
+                    GameStat* gameStat);
+void countGameTime(GameStat* gameStat);
+void menu(Window* window, GameStat* game_stat, int key);
+void authors(Window* window);
+void settings(Window* window);
 void gameOver();
 
 

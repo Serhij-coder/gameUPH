@@ -9,8 +9,15 @@
 
 void gameLoop()
 {
+    static int isGame = 1;
+
     Window window;
     initWindow(&window);
+
+    GameStat gameStat;
+    gameStat.time = 0;
+    gameStat.score = 0;
+    gameStat.gameMode = 3;
 
     Player player = createPlayer(playerSpriteData, 7, SPRITE_HEIGHT, 0, 0);
     player.y = window.height - player.height;
@@ -21,39 +28,67 @@ void gameLoop()
 
     Enemy enemies[ENEMIES_ARR_SIZE];
     createEnemiesArr(enemies);
-    // After createEnemiesArr(enemies);
-    // for (int i = 0; i < ENEMIES_ARR_SIZE; i++)
-    // {
-    //     enemies[i].active = 1; // Force activate
-    //
-    //     // Grid positioning
-    //     const int enemiesPerRow = 10;
-    //     const int spacingX = 2;
-    //     const int startX = (window.width - (enemiesPerRow * (SPRITE_WIDTH + spacingX))) / 2;
-    //
-    //     enemies[i].x = startX + (i % enemiesPerRow) * (SPRITE_WIDTH + spacingX);
-    //     enemies[i].y = 2 + (i / enemiesPerRow) * (SPRITE_HEIGHT + 1); // Start at top
-    // }
 
     Bullet enemyBullets[ENEMY_BULLETS_ARR_SIZE];
     createEnemyBulletArr(enemyBullets);
 
 
-    while (1)
+    while (isGame)
     {
+        if (isGame == 0)
+        {
+            break;
+        }
         char key = getKeyPress();
-        playerMovement(&player, &window, key);
-        playerShoot(playerBullets, &player, key);
 
-        enemyMovement(enemies, &window);
+        if (gameStat.gameMode == 0) // Game
+        {
+            if (key == 'q')
+            {
+                gameStat.gameMode = 3;
+                continue;
+            }
 
-        collisionCheck(&player, enemies, playerBullets, enemyBullets);
+            playerMovement(&player, &window, key);
+            playerShoot(playerBullets, &player, key);
 
-        clear();
-        renderEnemies(enemies); // Should come FIRST
-        renderBullet(playerBullets);
-        renderSprite(&player);
-        waitForRefreshRate();
+            enemyMovement(enemies, &window);
+
+            collisionCheck(&player, enemies, playerBullets, enemyBullets, &gameStat);
+
+            clear();
+            renderEnemies(enemies);
+            renderBullet(playerBullets);
+            renderSprite(&player);
+            renderGameStat(&gameStat);
+
+            waitForRefreshRate();
+            countGameTime(&gameStat);
+        }
+        else if (gameStat.gameMode == 1) // Settings
+        {
+            clear();
+
+            settings(&window);
+
+            gameStat.gameMode = 3;
+        }
+        else if (gameStat.gameMode == 2) // Authors
+        {
+            clear();
+
+            authors(&window);
+
+            gameStat.gameMode = 3;
+        }
+        else if (gameStat.gameMode == 3) // Menu
+        {
+            clear();
+
+            menu(&window, &gameStat, key);
+
+            waitForRefreshRate();
+        }
     };
 }
 
@@ -156,7 +191,8 @@ void enemyMovement(Enemy enemies[ENEMIES_ARR_SIZE], Window* window)
 void collisionCheck(Player* player,
                     Enemy enemies[ENEMIES_ARR_SIZE],
                     Bullet playerBulletsArr[BULLETS_ARR_SIZE],
-                    Bullet enemyBullets[ENEMY_BULLETS_ARR_SIZE])
+                    Bullet enemyBullets[ENEMY_BULLETS_ARR_SIZE],
+                    GameStat* gameStat)
 {
     for (int i = 0; i < ENEMIES_ARR_SIZE; i++)
     {
@@ -171,11 +207,218 @@ void collisionCheck(Player* player,
                 playerBulletsArr[j].y = 1000;
                 enemies[i].active = 0;
                 enemies[i].y = -10;
+
+                gameStat->score += Random(8, 12);
             }
         }
     }
 }
 
+void countGameTime(GameStat* gameStat)
+{
+    static int ctr = 0;
+    if (ctr == FRAME_RATE)
+    {
+        gameStat->time++;
+        ctr = 0;
+    }
+    else
+    {
+        ctr++;
+    }
+}
+
 void gameOver()
 {
+}
+
+// Welcome to my dark, dark, dark side
+// Toto je velmi hnusne :(
+void menu(Window* window, GameStat* game_stat, int key)
+{
+    static int start_x = 0;
+    static int start_y = 0;
+    static int menuMode = 0; // 0 - game, 1 - settings, 2 - authors
+
+    const char* asciiArt[] = {
+        " ██████  ████████    ███    ████████          ████████  ████████ ████████ ████████ ██    ██ ████████  ████████ ████████   ██████  ",
+        "██    ██    ██      ██ ██   ██     ██         ██     ██ ██       ██       ██       ███   ██ ██     ██ ██       ██     ██ ██    ██ ",
+        "██          ██     ██   ██  ██     ██         ██     ██ ██       ██       ██       ████  ██ ██     ██ ██       ██     ██ ██       ",
+        " ██████     ██    ██     ██ ████████          ██     ██ ██████   ██████   ██████   ██ ██ ██ ██     ██ ██████   ████████   ██████  ",
+        "      ██    ██    █████████ ██   ██           ██     ██ ██       ██       ██       ██  ████ ██     ██ ██       ██   ██         ██ ",
+        "██    ██    ██    ██     ██ ██    ██          ██     ██ ██       ██       ██       ██   ███ ██     ██ ██       ██    ██  ██    ██ ",
+        " ██████     ██    ██     ██ ██     ██         ████████  ████████ ██       ████████ ██    ██ ████████  ████████ ██     ██  ██████  "
+    };
+
+    const char* pointer[] = {
+        "██     ",
+        " ██    ",
+        "  ██   ",
+        "   ██  ",
+        "  ██   ",
+        " ██    ",
+        "██     "
+    };
+
+    const char* menuItems[] = {
+        " ██████      ███    ██     ██ ████████                              ",
+        "██    ██    ██ ██   ███   ███ ██                                    ",
+        "██         ██   ██  ████ ████ ██                                    ",
+        "██   ████ ██     ██ ██ ███ ██ ██████                                ",
+        "██    ██  █████████ ██     ██ ██                                    ",
+        "██    ██  ██     ██ ██     ██ ██                                    ",
+        " ██████   ██     ██ ██     ██ ████████                              ",
+        "                                                                    ",
+        "██████  ████████ ████████ ████████ ████ ██    ██  ██████    ██████  ",
+        "██    ██ ██         ██       ██     ██  ███   ██ ██    ██  ██    ██ ",
+        "██       ██         ██       ██     ██  ████  ██ ██        ██       ",
+        " ██████  ██████     ██       ██     ██  ██ ██ ██ ██   ████  ██████  ",
+        "      ██ ██         ██       ██     ██  ██  ████ ██    ██        ██ ",
+        "██    ██ ██         ██       ██     ██  ██   ███ ██    ██  ██    ██ ",
+        " ██████  ████████   ██       ██    ████ ██    ██  ██████    ██████  ",
+        "                                                                    ",
+        "   ███    ██     ██ ████████ ██     ██  ███████  ████████   ██████  ",
+        "  ██ ██   ██     ██    ██    ██     ██ ██     ██ ██     ██ ██    ██ ",
+        " ██   ██  ██     ██    ██    ██     ██ ██     ██ ██     ██ ██       ",
+        "██     ██ ██     ██    ██    █████████ ██     ██ ████████   ██████  ",
+        "█████████ ██     ██    ██    ██     ██ ██     ██ ██   ██         ██ ",
+        "██     ██ ██     ██    ██    ██     ██ ██     ██ ██    ██  ██    ██ ",
+        "██     ██  ███████     ██    ██     ██  ███████  ██     ██  ██████  "
+    };
+
+    start_x = window->width / 2 - 65;
+    start_y = window->height / 2 - 20;
+
+    clear();
+
+    for (int i = 0; i < 7; i++)
+    {
+        mvprintw(start_y + i, start_x, "%s", asciiArt[i]);
+    }
+
+    if (key == MENU_UP)
+    {
+        menuMode = (menuMode - 1 + 3) % 3;
+    }
+    else if (key == MENU_DOWN)
+    {
+        menuMode = (menuMode + 1) % 3;
+    }
+    else if (key == 'q')
+    {
+        game_stat->gameMode = 0;
+        return;
+    }
+    else if (key == 'e' || key == SHOOT)
+    {
+        game_stat->gameMode = menuMode;
+        return;
+    }
+
+    int menu_start_y = start_y + 10;
+    int menu_start_x = start_x + 20;
+
+    for (int i = 0; i < 23; i++)
+    {
+        mvprintw(menu_start_y + i, menu_start_x + 7, "%s", menuItems[i]);
+    }
+
+    int pointer_y = menu_start_y + (menuMode * 8);
+    for (int i = 0; i < 7; i++)
+    {
+        mvprintw(pointer_y + i, menu_start_x, "%s", pointer[i]);
+    }
+
+    refresh();
+}
+
+void authors(Window* window)
+{
+    const char* authorsArt[] = {
+        " ██████  ████████ ████████  ██     ██ ████ ████                                      ",
+        "██    ██ ██       ██     ██ ██     ██  ██   ██                                       ",
+        "██       ██       ██     ██ ██     ██  ██   ██                                       ",
+        " ██████  ██████   ████████  █████████  ██   ██                                       ",
+        "      ██ ██       ██   ██   ██     ██  ██   ██                                       ",
+        "██    ██ ██       ██    ██  ██     ██  ██   ██                                       ",
+        " ██████  ████████ ██     ██ ██     ██ ████ ████                                      ",
+        "                                                                                     ",
+        "████████ ████████ ████████   ███████  ████████  ████████ ██    ██ ██    ██  ███████  ",
+        "██       ██       ██     ██ ██     ██ ██     ██ ██       ███   ██ ██   ██  ██     ██ ",
+        "██       ██       ██     ██ ██     ██ ██     ██ ██       ████  ██ ██  ██   ██     ██ ",
+        "██████   ██████   ██     ██ ██     ██ ████████  ██████   ██ ██ ██ █████    ██     ██ ",
+        "██       ██       ██     ██ ██     ██ ██   ██   ██       ██  ████ ██  ██   ██     ██ ",
+        "██       ██       ██     ██ ██     ██ ██    ██  ██       ██   ███ ██   ██  ██     ██ ",
+        "██       ████████ ████████   ███████  ██     ██ ████████ ██    ██ ██    ██  ███████  ",
+        "                                                                                     ",
+        "                                                                                     ",
+        "                                                                                     ",
+        "██       ██     ██ ██    ██    ███     ██████                                        ",
+        "██       ██     ██ ██   ██    ██ ██   ██    ██                                       ",
+        "██       ██     ██ ██  ██    ██   ██  ██                                             ",
+        "██       ██     ██ █████    ██     ██  ██████                                        ",
+        "██       ██     ██ ██  ██   █████████       ██                                       ",
+        "██       ██     ██ ██   ██  ██     ██ ██    ██                                       ",
+        "████████  ███████  ██    ██ ██     ██  ██████                                        ",
+        "                                                                                     ",
+        "██          ███     ██████  ██    ██  ███████                                        ",
+        "██         ██ ██   ██    ██ ██   ██  ██     ██                                       ",
+        "██        ██   ██  ██       ██  ██   ██     ██                                       ",
+        "██       ██     ██ ██       █████    ██     ██                                       ",
+        "██       █████████ ██       ██  ██   ██     ██                                       ",
+        "██       ██     ██ ██    ██ ██   ██  ██     ██                                       ",
+        "████████ ██     ██  ██████  ██    ██  ███████                                        "
+    };
+    int start_x = window->width / 2 - 43;
+    int start_y = window->height / 2 - 16;
+
+    for (int i = 0; i < 33; i++)
+    {
+        mvprintw(start_y + i, start_x, "%s", authorsArt[i]);
+    }
+
+    nodelay(stdscr, 0);
+    getch();
+    nodelay(stdscr, 1);
+}
+
+void settings(Window* window)
+{
+    const char* asciiArt[] = {
+        "██    ██  ███████  ████████ ██     ██ ████ ██    ██  ██████   ",
+        "███   ██ ██     ██    ██    ██     ██  ██  ███   ██ ██    ██  ",
+        "████  ██ ██     ██    ██    ██     ██  ██  ████  ██ ██        ",
+        "██ ██ ██ ██     ██    ██    █████████  ██  ██ ██ ██ ██   ████ ",
+        "██  ████ ██     ██    ██    ██     ██  ██  ██  ████ ██    ██  ",
+        "██   ███ ██     ██    ██    ██     ██  ██  ██   ███ ██    ██  ",
+        "██    ██  ███████     ██    ██     ██ ████ ██    ██  ██████   ",
+        "                                                              ",
+        "████████  ███████  ████████                                   ",
+        "██       ██     ██ ██     ██                                  ",
+        "██       ██     ██ ██     ██                                  ",
+        "██████   ██     ██ ████████                                   ",
+        "██       ██     ██ ██   ██                                    ",
+        "██       ██     ██ ██    ██                                   ",
+        "██        ███████  ██     ██                                  ",
+        "                                                              ",
+        "██    ██  ███████  ██      ██                                 ",
+        "███   ██ ██     ██ ██  ██  ██                                 ",
+        "████  ██ ██     ██ ██  ██  ██                                 ",
+        "██ ██ ██ ██     ██ ██  ██  ██                                 ",
+        "██  ████ ██     ██ ██  ██  ██                                 ",
+        "██   ███ ██     ██ ██  ██  ██                                 ",
+        "██    ██  ███████   ███  ███                                  "
+    };
+
+    int start_x = window->width / 2 - 31;
+    int start_y = window->height / 2 - 11;
+
+    for (int i = 0; i < 23; i++)
+    {
+        mvprintw(start_y + i, start_x, "%s", asciiArt[i]);
+    }
+
+    nodelay(stdscr, 0);
+    getch();
+    nodelay(stdscr, 1);
 }

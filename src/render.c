@@ -65,3 +65,18 @@ void initWindow(Window* window)
 {
     getmaxyx(stdscr, window->height, window->width);
 }
+
+void renderGameStat(GameStat* stats) {
+    int minutes = stats->time / 60;
+    int seconds = stats->time % 60;
+
+    static int start_x = 0;
+    static int start_y = 0;
+
+    mvprintw(start_y, start_x, "+---------------------+");
+    mvprintw(start_y+1, start_x, "| TIME  :    %02d:%02d    |", minutes, seconds);
+    mvprintw(start_y+2, start_x, "| SCORE :  %-9d  |", stats->score);
+    mvprintw(start_y+3, start_x, "+---------------------+");
+
+    refresh();
+}

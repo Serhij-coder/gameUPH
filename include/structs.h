@@ -10,4 +10,11 @@ typedef struct {
     int height;
 } Window;
 
+typedef struct
+{
+    int time;
+    int score;
+    int gameMode; // 0 - game, 1 - settings, 2 - authors, 3 - menu
+} GameStat;
+
 #endif //STRUCTS_H
