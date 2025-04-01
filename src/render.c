@@ -1,7 +1,4 @@
-
-
 #include <ncurses.h>
-#include <stdio.h>
 #include <unistd.h>
 
 #include "../include/settings.h"

@@ -13,7 +13,7 @@ void gameLoop()
     static int continueGame = 0;
 
     Settings setts;
-    setts.FRAME_RATE = 30;
+    setts.FRAME_RATE = 30; // !!!_NEMENIT_!!!
     setts.ENEMY_SHOOT_SPEED = 3; // Seconds per bullet
     setts.ENEMY_MOVE_SPEED = 15; // Every x frames
     setts.ENEMIES_SPAWN_RATE = 5; // Every x seconds
@@ -190,7 +190,7 @@ void enemyMovement(Enemy enemies[ENEMIES_ARR_SIZE], Window* window, Settings* se
     {
         if (enemies[i].active == 1)
         {
-            if (enemies[i].moveTime == setts->ENEMY_MOVE_SPEED)
+            if (enemies[i].moveTime >= setts->ENEMY_MOVE_SPEED)
             {
                 enemies[i].y++;
                 enemies[i].moveTime = 0;
