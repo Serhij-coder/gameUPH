@@ -1,1 +1,2 @@
-# !!!MOZNO_SA_NESPUSTI_NA_WINDOWS!!!
+# !!!NESPUSTI_SA_NA_WINDOWS!!!
+## Ale ide cez WSL
